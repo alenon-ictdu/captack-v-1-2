@@ -13,4 +13,9 @@ class Book extends Model
     public function course(){
     	return $this->belongsTo('ICTDUInventory\Course');
     }
+
+    public function tags()
+    {
+    	return $this->belongsToMany('App\Tag');
+    }
 }

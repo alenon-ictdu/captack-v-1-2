@@ -99,7 +99,7 @@ class BookController extends Controller
         $book->save();
 
         Session::flash('success', 'Book successfully added.');
-        return redirect()->route('home');
+        return redirect()->route('book.show', $book->id);
         
 
     }

@@ -72,7 +72,7 @@
               <input type="text" id="quantity" class="form-control" name="quantity" required>
           </div>
           <div class="form-group row">
-              <label class="col-md-3">File Upload</label>
+              <label class="col-md-3">Image Upload</label>
               <div class="col-md-9">
                   <div class="custom-file">
                       <input type="file" class="custom-file-input" id="validatedCustomFile" name="bookpic">
