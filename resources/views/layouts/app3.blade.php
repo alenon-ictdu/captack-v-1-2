@@ -202,6 +202,7 @@
                         "> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('home') }}" aria-expanded="false"><i class="fas fa-book"></i><span class="hide-menu">Books</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('course.index') }}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Courses</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('view.borrowers') }}" aria-expanded="false"><i class="fas fa-users"></i><span class="hide-menu">Borrowers</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('tag.index') }}" aria-expanded="false"><i class="fa fa-tag"></i><span class="hide-menu">Tags</span></a></li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

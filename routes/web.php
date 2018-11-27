@@ -81,4 +81,7 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 
 	Route::get('/dashboard', 'BookController@dashboard')->name('dashboard');
 
+	//Tags
+	Route::resource('tag', 'TagController', ['except' => ['create']]);
+
 });
