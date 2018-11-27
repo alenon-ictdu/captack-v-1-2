@@ -73,7 +73,7 @@
                 <!-- ============================================================== -->
                 <div class="row">
                     <!-- column -->
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title"><i class="fas fa-list"></i> Latest Books</h4>
@@ -100,7 +100,35 @@
                     </div>
                     <!-- column -->
 
-                    <div class="col-lg-6">
+                     <div class="col-lg-4">
+                        <!-- Card -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title"><i class="fas fa-list"></i> Available Books</h4>
+                            </div>
+                            <div class="border-top"></div>
+                            <div class="comment-widgets scrollable" style="height: 435px;">
+                                <!-- Comment Row -->
+                                @foreach($books as $row)
+                                    @if($row->quantity == 1)
+                                        <div class="d-flex flex-row comment-row m-t-0">
+                                            <div class="p-2"></div>
+                                            <div class="comment-text w-100">
+                                                <h6 class="font-medium" style="text-transform: capitalize;">{{$row->author}}</h6>
+                                                <span class="m-b-15 d-block" style="text-transform: capitalize;">{{$row->title}} </span>
+                                                <div class="comment-footer">
+                                                    <span class="text-muted float-right"> {{$row->year_published}}</span>
+                                                    <a href="{{ route('book.show', $row->id) }}" class="btn btn-success btn-sm">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4">
                         <!-- Card -->
                         <div class="card">
                             <div class="card-body">
@@ -127,6 +155,7 @@
                             </div>
                         </div>
                     </div>
+                   
                 </div>
                 <!-- ============================================================== -->
                 <!-- Recent comment and chats -->
