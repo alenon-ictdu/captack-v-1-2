@@ -100,7 +100,7 @@
 
             <div>
               {{-- <i class="fa fa-map-marker"></i> --}}
-              <a href="#"><img src="{{ asset('landing-img/logo.png') }}" width="40"></a>
+              <a href="https://spcf.edu.ph"><img src="{{ asset('landing-img/logo.png') }}" width="40"></a>
               <p>Systems Plus College Foundation</p>
             </div>
 
@@ -116,12 +116,12 @@
 
             <p class="footer-company-about">
               <span>About the company</span>
-              Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+              ICTDU is one of the research units of <b>Systems Plus College Foundation</b> that is involved with researches on the identification, design and implementation of IT Enabled Processes, Initiation and negotiation of Joint Ventures and Commercialization of Technology with External or Industry Partners.
             </p>
 
             <div class="footer-icons">
 
-              <a href="#"><i class="fa fa-facebook"></i></a>
+              <a href="https://www.facebook.com/ictdu"><i class="fa fa-facebook"></i></a>
               <a href="#"><i class="fa fa-twitter"></i></a>
               <a href="#"><i class="fa fa-linkedin"></i></a>
               <a href="#"><i class="fa fa-github"></i></a>

@@ -5,7 +5,7 @@ namespace ICTDUInventory\Http\Controllers;
 use Illuminate\Http\Request;
 use ICTDUInventory\Book;
 use ICTDUInventory\Course;
-
+use ICTDUInventory\Tag;
 
 class HomeController extends Controller
 {
@@ -40,6 +40,7 @@ class HomeController extends Controller
         $items = $request->items ?? 10;
         $books = Book::all();
         $courses = Course::all();
+        $tags = Tag::all();
         //$books = Book::paginate($items);
         //$books->withPath('custom/url');
 
@@ -50,7 +51,8 @@ class HomeController extends Controller
               ->with('page', $page)
               ->with('isActive', $isActive)
               ->with('day7', $day7)
-              ->with('courses', $courses);
+              ->with('courses', $courses)
+              ->with('tags', $tags);
     }
     
 }

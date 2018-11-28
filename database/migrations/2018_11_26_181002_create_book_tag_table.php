@@ -22,7 +22,7 @@ class CreateBookTagTable extends Migration
         });
     }
 
-    /**
+    /** 
      * Reverse the migrations.
      *
      * @return void

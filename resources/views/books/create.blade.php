@@ -61,12 +61,34 @@
           </div>
           <div class="form-group">
               <label for="course">Course</label>
-              <select class="select2 form-control custom-select" style="width: 100%; height:36px;" name="course" required>
+              <select class="select2-selection--multiple form-control custom-select" style="width: 100%; height:36px;" name="course" required>
                       @foreach($courses as $row)
                           <option value="{{ $row->id }}">{{ $row->name }}</option>
                       @endforeach
               </select>
           </div>
+          <div class="form-group">
+            <label>Tags</label>
+                <select name="tags[]" class="select2 form-control m-t-15" multiple="multiple" style="height: 36px;width: 100%;">
+                        @foreach($tags as $row)
+                          <option value="{{ $row->id }}">{{ $row->name }}</option>
+                      @endforeach
+                </select>
+        </div>
+          {{-- <div class ="form-group">
+            <form class="attireCodeToggleBlock" action="">
+                <label class="col-md-3 m-t-15">Tags</label>
+                <select class="multipleSelect" multiple name="language">
+                  
+                  @foreach($courses as $row)
+                          <option value="{{ $row->id }}">{{ $row->name }}</option>
+                      @endforeach
+                </select>
+                <script>
+                  $('.multipleSelect').fastselect();
+                </script>
+            </form>
+          </div> --}}
           <div class="form-group">
               <label for="quantity">Quantity</label>
               <input type="text" id="quantity" class="form-control" name="quantity" required>
@@ -115,4 +137,7 @@
 
 @section('scripts')
       <script src="{{ asset('js/parsley.min.js') }}"></script>
+      <script>
+        $(".select2").select2();
+      </script>
 @endsection

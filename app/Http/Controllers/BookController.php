@@ -10,6 +10,7 @@ use Storage;
 use Hash;
 use ICTDUInventory\Borrower;
 use ICTDUInventory\Course;
+use ICTDUInventory\Tag;
 
 class BookController extends Controller
 {
@@ -28,6 +29,7 @@ class BookController extends Controller
         $books = Book::all();
         $courses = COurse::all();
         $borrowers = Borrower::all();
+        $tags = Tag::all();
         $borrowedBooks = 0;
         foreach($books as $row){
             if($row->availability == 0){
@@ -53,10 +55,12 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   $tags = Tag::all();
         $courses = Course::all();
         return view('books.create')
-            ->with('courses', $courses);
+            ->with('courses', $courses)
+            ->with('tags', $tags);
+            
     }
 
     /**

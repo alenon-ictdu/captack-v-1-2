@@ -63,7 +63,7 @@
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit"></i> Edit Course</h5>
+					        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit"></i> Edit Tag</h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
@@ -71,7 +71,7 @@
 					      <div class="modal-body">
 					       	<form id="edit_form{{$row->id}}" method="POST">
 							  <div class="form-group">
-							    <label for="name">Course Name:</label>
+							    <label for="name">Tag Name:</label>
 							    <input type="text" class="form-control input-sm" name="editedname" value="{{ $row->name }}" required>
 							  </div>
 							  <input type="hidden" name="_token" value="{{ Session::token() }}">
