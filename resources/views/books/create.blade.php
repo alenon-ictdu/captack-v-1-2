@@ -74,7 +74,7 @@
                           <option value="{{ $row->id }}">{{ $row->name }}</option>
                       @endforeach
                 </select>
-        </div>
+          </div>
           {{-- <div class ="form-group">
             <form class="attireCodeToggleBlock" action="">
                 <label class="col-md-3 m-t-15">Tags</label>
@@ -93,16 +93,6 @@
               <label for="quantity">Quantity</label>
               <input type="text" id="quantity" class="form-control" name="quantity" required>
           </div>
-          <div class="form-group row">
-              <label class="col-md-3">Image Upload</label>
-              <div class="col-md-9">
-                  <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="validatedCustomFile" name="bookpic">
-                      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                      <div class="invalid-feedback">Example invalid custom file feedback</div>
-                  </div>
-              </div>
-          </div>
           {{-- <div class="form-group row">
               <label class="col-md-3">Available</label>
               <div class="col-md-9">
@@ -112,15 +102,44 @@
                   </div>
               </div>
           </div> --}}
+
+
           <div class="form-group row">
-              <label class="col-md-3">Cd</label>
+              <label class="col-md-3">With Cd</label>
               <div class="col-md-9">
                   <div class="custom-control custom-checkbox mr-sm-2">
-                      <input type="checkbox" class="custom-control-input" id="cd" name="cd">
-                      <label class="custom-control-label" for="cd">Yes</label>
+                      <input type="checkbox" onchange="validatebtn()" class="form-control" id="withcd" name="withcd" value="1">
                   </div>
               </div>
+              <label class="col-md-3">Cd Only</label>
+              <div class="col-md-9">
+                  <div class="custom-control custom-checkbox mr-sm-2">
+                      <input type="checkbox" onchange="validatebtn()" class="form-control" id="cdonly" name="cdonly" value="1">
+              </div>
           </div>
+        </div>
+
+          <div class="form-group">
+              <label style="visibility: hidden;" id="cdquantitylabel" for="cdquantity">CD Quantity</label>
+              <input type="hidden" id="cdquantity" class="form-control" name="cdquantity" required>
+          </div>
+
+          <script>
+function validatebtn() {
+    if (document.getElementById("withcd").checked == true) {
+        document.getElementById("cdquantity").type = "text";
+        document.getElementById("cdquantitylabel").style.visibility = "visible";
+    }
+    else if (document.getElementById("cdonly").checked == true) {
+        document.getElementById("cdquantity").type = "text";
+        document.getElementById("cdquantitylabel").style.visibility = "visible";
+    }
+    else {
+        document.getElementById("cdquantity").type = "hidden";
+        document.getElementById("cdquantitylabel").style.visibility = "hidden";
+        }
+    }
+          </script>
 
       </div>
   </form>

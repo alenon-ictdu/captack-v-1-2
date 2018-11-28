@@ -39,11 +39,13 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255'
+            'name' => 'required|max:255',
+            'abbreviation' => 'required|max:255'
         ]);
 
         $course = New Course;
         $course->name = $request->name;
+        $course->abbreviation = $request->abbreviation;
         $course->save();
 
         Session::flash('success', 'Course has been added.');
@@ -81,11 +83,13 @@ class CourseController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'editedname' => 'required|max:255'
+            'editedname' => 'required|max:255',
+            'editedabbreviation' => 'required|max:255'
         ]);
 
         $course = Course::find($id);
         $course->name = $request->editedname;
+        $course->abbreviation = $request->editedabbreviation;
         $course->save();
         Session::flash('success', 'Course has been changed');
         return redirect()->route('course.index');

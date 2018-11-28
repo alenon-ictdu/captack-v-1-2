@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImageColToBooks extends Migration
+class AddCdOnlyToBooks extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class AddImageColToBooks extends Migration
     public function up()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->string('image')->nullable()->after('author');
+            $table->boolean('cd_only')->nullable()->after('with_cd');
+            $table->integer('cd_quantity')->unsigned()->nullable()->after('with_cd');
+
         });
     }
 
@@ -25,8 +27,6 @@ class AddImageColToBooks extends Migration
      */
     public function down()
     {
-        Schema::table('books', function (Blueprint $table) {
-            $table->dropColumn('image');
-        });
+        //
     }
 }

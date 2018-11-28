@@ -39,24 +39,6 @@
         <label>Year Published: </label> {{ $book->year_published }} <br>
         <label>Course: </label> @foreach($courses as $row) @if($row->id == $book->course_id) {{ $row->name }} @endif @endforeach
 
-        <div class="row el-element-overlay">
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="el-card-item">
-                        <div class="el-card-avatar el-overlay-1"> @if($book->image == '') <img src="{{ asset('default-book.jpg') }}"/> @else <img src="{{ asset('images/' . $book->image) }}"/> @endif
-                            <div class="el-overlay">
-                                <ul class="list-style-none el-info">
-                                    <li class="el-item">@if($book->image == '') <a class="btn default btn-outline image-popup-vertical-fit el-link" href="{{ asset('default-book.jpg') }}"><i class="mdi mdi-magnify-plus"></i></a> @else <a class="btn default btn-outline image-popup-vertical-fit el-link" href="{{ asset('images/' . $book->image) }}"><i class="mdi mdi-magnify-plus"></i></a> @endif</li>
-                                </ul>
-                            </div>
-                        </div>
-                        {{-- <div class="el-card-content">
-                            <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of project</span>
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
-        </div>
       </div>
       <div class="col-lg-5">
       	<div class="card-body border-bottom" style=" margin-bottom: 10px;">

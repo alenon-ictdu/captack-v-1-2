@@ -37,24 +37,6 @@
         <label>Year Published: </label> {{ $book->year_published }} <br>
         <label>Course: </label> @foreach($courses as $row) @if($row->id == $book->course_id) {{ $row->name }} @endif @endforeach
 
-        <div class="row el-element-overlay">
-            <div class="col-lg-3 col-md-6">
-                <div class="card">
-                    <div class="el-card-item">
-                        <div class="el-card-avatar el-overlay-1"> @if($book->image == '') <img src="{{ asset('default-book.jpg') }}"/> @else <img src="{{ asset('images/' . $book->image) }}"/> @endif
-                            <div class="el-overlay">
-                                <ul class="list-style-none el-info">
-                                    <li class="el-item">@if($book->image == '') <a class="btn default btn-outline image-popup-vertical-fit el-link" href="{{ asset('default-book.jpg') }}"><i class="mdi mdi-magnify-plus"></i></a> @else <a class="btn default btn-outline image-popup-vertical-fit el-link" href="{{ asset('images/' . $book->image) }}"><i class="mdi mdi-magnify-plus"></i></a> @endif</li>
-                                </ul>
-                            </div>
-                        </div>
-                        {{-- <div class="el-card-content">
-                            <h4 class="m-b-0">Project title</h4> <span class="text-muted">subtitle of project</span>
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
-        </div>
       </div>
       <div class="col-lg-5">
         <dl class="dl-horizontal">
@@ -74,14 +56,19 @@
                                         <i style="color: #da542e;" class="fas fa-times"></i>
                                         @endif --}}
             <label>Quantity :</label> {{ $book->quantity }}
+            <label>Available :</label> {{ $book->available }}
         </dl>
         <dl class="dl-horizontal">
-          <label>CD:</label> @if($book->with_cd == 1)
-                                        <i style="color: #28b779;" class="fas fa-check"></i>
-                                        @else
+          @if($book->with_cd == 1)
+                                        <label>CD: {{$book->cd_quantity}}</label> <i style="color: #28b779;" class="fas fa-check"></i>
+                                        @elseif($book->cd_only == 1)
+                                        <label>CD ONLY: {{$book->cd_quantity}}</label>
                                         <i style="color: #da542e;" class="fas fa-times"></i>
                                         @endif
         </dl>
+        @if($book->available >= 1)
+                                            <a href="{{ route('view.borrow.book', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-book"> Borrow</i></a>
+                                          @endif
       </div>
 
     </div>

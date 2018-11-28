@@ -59,11 +59,11 @@
 						<td>{{date('F d, Y',strtotime($row->deadline) )}}</td>
 						<td>
 							<form method="POST" action="{{ route('destroy.borrow.book', $row->id) }}">
-								<button class="btn btn-xs btn-cyan"><i class="fas fa-reply"></i> Return</button>
+								<button class="btn btn-xs btn-cyan"><i class="fas fa-reply"></i> Return Item</button>
 								<input type="hidden" name="_token" value="{{ Session::token() }}">
                                 {{ method_field('DELETE') }}
 							</form>
-						 	<a href="{{ route('edit.borrow.book', $row->id) }}" class="btn btn-xs btn-success"><i class="fas fa-edit"></i> Edit</a></td>
+						 	<a href="{{ route('edit.borrow.book', $row->id) }}" class="btn btn-xs btn-success"><i class="fas fa-edit"></i> EXTEND</a></td>
 					</tr>
 				@endforeach
 			</tbody>

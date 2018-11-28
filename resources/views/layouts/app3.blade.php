@@ -106,7 +106,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('book.create') }}">Book</a>
-                                <a class="dropdown-item" href="{{ route('course.index') }}">Course</a>
+                                <a class="dropdown-item" href="{{ route('course.index') }}">Program</a>
                             </div>
                         </li>
                         <!-- ============================================================== -->
@@ -203,9 +203,10 @@
                         {{ 'activee' }}
                         @endif
                         "> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('home') }}" aria-expanded="false"><i class="fas fa-book"></i><span class="hide-menu">Books</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('course.index') }}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Courses</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('view.borrowers') }}" aria-expanded="false"><i class="fas fa-users"></i><span class="hide-menu">Borrowers</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('tag.index') }}" aria-expanded="false"><i class="fa fa-tag"></i><span class="hide-menu">Tags</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('course.index') }}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Programs</span></a></li>
+                        
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

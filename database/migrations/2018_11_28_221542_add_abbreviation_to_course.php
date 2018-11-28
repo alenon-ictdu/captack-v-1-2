@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddIsAvailableToBooksTable extends Migration
+class AddAbbreviationToCourse extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddIsAvailableToBooksTable extends Migration
      */
     public function up()
     {
-        Schema::table('books', function (Blueprint $table) {
-            $table->integer('available')->nullable()->after('author');
+        Schema::table('courses', function (Blueprint $table) {
+            $table->string('abbreviation')->nullable()->after('name');
         });
     }
 
@@ -25,8 +25,6 @@ class AddIsAvailableToBooksTable extends Migration
      */
     public function down()
     {
-        Schema::table('books', function (Blueprint $table) {
-            //
-        });
+        //
     }
 }

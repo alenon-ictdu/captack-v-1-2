@@ -31,6 +31,7 @@ class BookController extends Controller
         $borrowers = Borrower::all();
         $tags = Tag::all();
         $borrowedBooks = 0;
+        $borrowcount = $borrowers->count();
         foreach($books as $row){
             if($row->availability == 0){
                 $borrowedBooks = $borrowedBooks + 1;
@@ -86,20 +87,12 @@ class BookController extends Controller
         $book->author = $request->author;
         $book->year_published = $request->year_published;
         $book->course_id = $request->course;
+        $book->available = $request->quantity;
         // $book->availability = $request->has('available');
         $book->quantity = $request->quantity;
-        $book->with_cd = $request->has('cd');
-        if($request->hasFile('bookpic')){
-                $image = $request->file('bookpic');
-                $filename = time() . '.' . $image->getClientOriginalExtension();
-                $location = public_path('images/' . $filename);
-                Image::make($image)->save($location);
-                $oldImage = $book->image; //old imagename
-
-                $book->image = $filename; 
-             
-        }
-
+        $book->with_cd = $request->has('withcd');
+        $book->cd_only = $request->has('cdonly');
+        $book->cd_quantity = $request->cdquantity;
         $book->save();
 
         Session::flash('success', 'Book successfully added.');
@@ -156,19 +149,10 @@ class BookController extends Controller
         $book->course_id = $request->course;
         // $book->availability = $request->has('available');
         $book->quantity = $request->quantity;
-        $book->with_cd = $request->has('cd');
-        if($request->hasFile('bookpic')){
-                $image = $request->file('bookpic');
-                $filename = $id . '.' . time() . '.' . $image->getClientOriginalExtension();
-                $location = public_path('images/' . $filename);
-                Image::make($image)->save($location);
-                $oldImage = $book->image; //old imagename
-
-                $book->image = $filename; 
-
-                Storage::delete($oldImage); //delete old image
-             
-        }
+        $book->with_cd = $request->has('withcd');
+        $book->cd_only = $request->has('cdonly');
+        $book->cd_quantity = $request->cdquantity;
+       
         $book->save();
 
         Session::flash('success', 'Book successfully changed.');
@@ -209,7 +193,9 @@ class BookController extends Controller
         $book->course_id = $request->course;
         // $book->availability = $request->has('available');
         $book->quantity = $request->quantity;
-        $book->with_cd = $request->has('cd');
+        $book->with_cd = $request->has('withcd');
+        $book->cd_only = $request->has('cdonly');
+        $book->cd_quantity = $request->cdquantity;
 
 
         if($request->hasFile('bookpic')){
@@ -248,19 +234,9 @@ class BookController extends Controller
         $book->course_id = $request->course;
         // $book->availability = $request->has('available');
         $book->quantity = $request->quantity;
-        $book->with_cd = $request->has('cd');
-        if($request->hasFile('bookpic')){
-                $image = $request->file('bookpic');
-                $filename = $id . '.' . time() . '.' . $image->getClientOriginalExtension();
-                $location = public_path('images/' . $filename);
-                Image::make($image)->save($location);
-                $oldImage = $book->image; //old imagename
-
-                $book->image = $filename; 
-
-                Storage::delete($oldImage); //delete old image
-             
-        }
+        $book->with_cd = $request->has('withcd');
+        $book->cd_only = $request->has('cdonly');
+        $book->cd_quantity = $request->cdquantity;
         $book->save();
 
         Session::flash('success', 'Book successfully changed.');
@@ -343,7 +319,7 @@ class BookController extends Controller
         $borrower->save();
 
         // $book->availability = 0;
-        $book->quantity = $book->quantity - 1;
+        $book->available = $book->available - 1;
 
         $book->save();
 

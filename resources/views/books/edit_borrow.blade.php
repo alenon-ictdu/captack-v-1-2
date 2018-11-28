@@ -59,22 +59,21 @@
       </div>
       <div class="col-lg-5">
       	<div class="card-body border-bottom" style=" margin-bottom: 10px;">
-      		<h4 class="card-title"><i class="fas fa-user"></i> Borrower Info</h4>
+      		<h4 class="card-title"><i class="fas fa-user"></i> EXTEND</h4>
       	</div>
         <form action="{{ route('update.borrow.book', $borrower->id) }}" class="form-horizontal" method="POST" data-parsley-validate="parsley" enctype="multipart/form-data">
 	    
 	    	<input type="hidden" name="book_id" value="{{ $borrower->book_id }}">
 	          <div class="form-group">
-	              <label for="firstname">Name</label>
-	              <input type="text" id="name" class="form-control input-sm" name="name" value="{{ $borrower->name }}" required data-parsley-maxlength="255" data-parsley-required-message="Name is required">
+	              <input type="hidden" id="name" class="form-control input-sm" name="name" value="{{ $borrower->name }}" required data-parsley-maxlength="255" data-parsley-required-message="Name is required">
 	          </div>
 	          <div class="form-group">
-	              <label for="address">Address</label>
-	              <input type="text" id="address" class="form-control input-sm" name="address" value="{{ $borrower->address }}" data-parsley-maxlength="255" data-parsley-required-message="Address is required">
+	              
+	              <input type="hidden" id="address" class="form-control input-sm" name="address" value="{{ $borrower->address }}" data-parsley-maxlength="255" data-parsley-required-message="Address is required">
 	          </div>
 	          <div class="form-group">
-	              <label for="contact">Contact</label>
-	              <input type="text" id="contact" class="form-control input-sm" name="contact" value="{{ $borrower->contact }}" required data-parsley-maxlength="25" data-parsley-required-message="Contact is required">
+	              
+	              <input type="hidden" id="contact" class="form-control input-sm" name="contact" value="{{ $borrower->contact }}" required data-parsley-maxlength="25" data-parsley-required-message="Contact is required">
 	          </div>
 	          <div class="form-group">
 	              <label for="deadline">Deadline</label>

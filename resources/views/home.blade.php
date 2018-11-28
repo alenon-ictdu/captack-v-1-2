@@ -67,7 +67,7 @@
                               <th style="width:10%">Author(s)</th>
                               <th style="width:10%">Year Published</th>
                               <th>Course</th>
-                              <th>Quantity</th>
+                              <th>Available</th>
                               {{-- <th>Availability</th> --}}
                               <th>CD</th>
                               <th>QR Code</th>
@@ -82,16 +82,16 @@
                                       <td title="{{ $book->title }}">{{ $book->title }} @if($book->created_at >= $day7) <span class="badge badge-danger">New</span> @endif</td>
                                       <td title="{{ $book->author }}">{{ (strlen($book->author) >= 30) ? substr($book->author, 0, 30). '...' : $book->author }}</td>
                                       <td>{{ $book->year_published }}</td>    
-                                      <td>{{ $book->course['name'] }}</td>
+                                      <td>{{ $book->course['abbreviation'] }}</td>
                                       {{-- <td>@if($book->availability == 1)
                                           <i style="color: #28b779;" class="fas fa-check"></i>
                                           @else
                                           <i style="color: #da542e;" class="fas fa-times"></i>
                                           @endif
                                       </td> --}}
-                                      <td>{{ $book->quantity }}</td>
-                                      <td>@if($book->with_cd == 1)
-                                          <i style="color: #28b779;" class="fas fa-check"></i>
+                                      <td>{{ $book->available }}</td>
+                                      <td>@if($book->with_cd || $book->cd_only == 1)
+                                          {{ $book->cd_quantity }}
                                           @else
                                           <i style="color: #da542e;" class="fas fa-times"></i>
                                           @endif
@@ -100,14 +100,14 @@
                                           <a href="#" class="btn btn-outline-dark btn-xs" data-toggle="modal" data-target="#myModal{{$book->id}}" title="Click me to view the QR"><i class="fa fa-qrcode"></i></a>
                                       </td>
                                       <td>
-                                          <a href="{{ route('book.show', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-eye"></i> View</a>
-                                          @if($book->quantity >= 1)
-                                            <a href="{{ route('view.borrow.book', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-book"></i> Borrow</a>
+                                          <a href="{{ route('book.show', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-eye"></i></a>
+                                          @if($book->available >= 1)
+                                            <a href="{{ route('view.borrow.book', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-book"></i></a>
                                           @endif
-                                          <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                          <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-edit"></i></a>
                                                                                   
                                           <form  class="form_inline" method="POST" action="{{ route('book.destroy', $book->id) }}" onsubmit="return ConfirmDelete()">
-                                          <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i> Delete</button>
+                                          <button class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                                           <input type="hidden" name="_token" value="{{ Session::token() }}">
                                           {{ method_field('DELETE') }}
                                           </form>

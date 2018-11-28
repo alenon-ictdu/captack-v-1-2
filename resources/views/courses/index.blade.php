@@ -1,18 +1,18 @@
 @extends('layouts.app3')
 
-@section('title', 'Courses')
+@section('title', 'Programs')
 
 @section('breadcrumb')
 
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-            <h4 class="page-title">Courses</h4>
+            <h4 class="page-title">Programs</h4>
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         {{-- <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li> --}}
-                        <li class="breadcrumb-item active" aria-current="page">Courses</li>
+                        <li class="breadcrumb-item active" aria-current="page">Programs</li>
                     </ol>
                 </nav>
             </div>
@@ -47,6 +47,7 @@
 				      <tr>
 				        <th>ID</th>
 				        <th>Name</th>
+				        <th>Short Name</th>
 				        <th>Action</th>
 				      </tr>
 				    </thead>
@@ -55,6 +56,7 @@
 				      <tr>
 				        <td>{{ $row->id }}</td>
 				        <td>{{ $row->name }}</td>
+				        <td>{{ $row->abbreviation }}</td>
 				        <td><button data-toggle="modal" data-target="#course{{$row->id}}Modal" class="btn btn-sm btn-cyan"><i class="fas fa-edit"></i> Edit</button></td>
 				      </tr>
 
@@ -63,7 +65,7 @@
 					  <div class="modal-dialog" role="document">
 					    <div class="modal-content">
 					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit"></i> Edit Course</h5>
+					        <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit"></i> Edit Program</h5>
 					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					          <span aria-hidden="true">&times;</span>
 					        </button>
@@ -71,8 +73,10 @@
 					      <div class="modal-body">
 					       	<form id="edit_form{{$row->id}}" method="POST">
 							  <div class="form-group">
-							    <label for="name">Course Name:</label>
+							    <label for="name">Program Name:</label>
 							    <input type="text" class="form-control input-sm" name="editedname" value="{{ $row->name }}" required>
+							    <label for="name">Short Name:</label>
+							    <input type="text" class="form-control input-sm" name="editedabbreviation" value="{{ $row->abbreviation }}" required>
 							  </div>
 							  <input type="hidden" name="_token" value="{{ Session::token() }}">
     						{{ method_field('PUT') }}
@@ -95,14 +99,16 @@
 	<div class="col-lg-4">
 		<div class="card">
 			<div class="card-body border-bottom">
-				<h4 class="card-title"><i class="fas fa-plus"></i> Add Course</h4>
+				<h4 class="card-title"><i class="fas fa-plus"></i> Add Program</h4>
 			</div>
 			<div class="card-body">
 				<form action="{{ route('course.store') }}" method="POST">
 					{{ csrf_field() }}
 				  <div class="form-group">
-				    <label for="name">Course Name:</label>
+				    <label for="name">Program Name:</label>
 				    <input type="text" class="form-control input-sm" name="name" required>
+				    <label for="name">Short Name:</label>
+				    <input type="text" class="form-control input-sm" name="abbreviation" required>
 				  </div>
 				  <button type="submit" class="btn btn-cyan btn-sm">Submit</button>
 				</form>
