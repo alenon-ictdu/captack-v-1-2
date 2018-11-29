@@ -69,18 +69,16 @@
               </select>
           </div>
           <div class="form-group">
+            <label>Tags</label>
+                <select name="tags[]" class="select2 form-control m-t-15" multiple="multiple" style="height: 36px;width: 100%;">
+                        @foreach($tags as $row)
+                          <option value="{{ $row->id }}">{{ $row->name }}</option>
+                      @endforeach
+                </select>
+          </div>
+          <div class="form-group">
               <label for="quantity">Quantity</label>
               <input type="text" id="quantity" class="form-control" name="quantity" value="{{ $book->quantity }}" required>
-          </div>
-          <div class="form-group row">
-              <label class="col-md-3">File Upload</label>
-              <div class="col-md-9">
-                  <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="validatedCustomFile" name="bookpic">
-                      <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
-                      <div class="invalid-feedback">Example invalid custom file feedback</div>
-                  </div>
-              </div>
           </div>
           {{-- <div class="form-group row">
               <label class="col-md-3">Available</label>
@@ -105,11 +103,17 @@
               </div>
           </div>
         </div>
-
+        @if($book->with_cd || $book->cd_only == 1)
           <div class="form-group">
-              <label style="visibility: hidden;" id="cdquantitylabel" for="cdquantity">CD Quantity</label>
-              <input type="hidden" id="cdquantity" class="form-control" name="cdquantity" required>
+              <label style="visibility: visible;" id="cdquantitylabel" for="cdquantity">CD Quantity</label>
+              <input type="text" id="cdquantity" class="form-control" name="cdquantity" value="{{ $book->cd_quantity }}" required>
           </div>
+        @else
+        <div class="form-group">
+              <label style="visibility: hidden;" id="cdquantitylabel" for="cdquantity">CD Quantity</label>
+              <input type="hidden" id="cdquantity" class="form-control" name="cdquantity" value="{{ $book->cd_quantity }}" required>
+          </div>
+        @endif
 
           <script>
 function validatebtn() {

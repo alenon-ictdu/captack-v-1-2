@@ -36,7 +36,7 @@
 @endif
 
 <div class="row">
-	<div class="col-lg-8">
+	<div class="col-lg-12">
 		<div class="card">
 			<div class="card-body border-bottom">
 				<h4 class="card-title"><i class="fas fa-list"></i> List</h4>
@@ -92,7 +92,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-4">
+{{-- 	<div class="col-lg-4">
 		<div class="card">
 			<div class="card-body border-bottom">
 				<h4 class="card-title"><i class="fas fa-plus"></i> Add Tag</h4>
@@ -108,7 +108,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div> --}}
 </div>
 
 @endsection

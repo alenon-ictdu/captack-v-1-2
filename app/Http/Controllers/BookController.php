@@ -31,7 +31,14 @@ class BookController extends Controller
         $borrowers = Borrower::all();
         $tags = Tag::all();
         $borrowedBooks = 0;
+        $returnedcount = 0;
         $borrowcount = $borrowers->count();
+        foreach($borrowers as $row){
+            if(empty($row->returned)){
+                $returnedcount = $returnedcount + 1;
+            }
+        }
+        
         foreach($books as $row){
             if($row->availability == 0){
                 $borrowedBooks = $borrowedBooks + 1;
@@ -41,6 +48,7 @@ class BookController extends Controller
             ->with('books', $books)
             ->with('courses', $courses)
             ->with('borrowers', $borrowers)
+            ->with('returnedcount', $returnedcount)
             ->with('borrowedBooks', $borrowedBooks)
             ->with('latestBooks', $latestBooks);
     }
@@ -118,9 +126,11 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         $courses = Course::all();
+        $tags = Tag::all();
         return view('books.edit')
                 ->with('book', $book)
-                ->with('courses', $courses);
+                ->with('courses', $courses)
+                ->with('tags',$tags);
     }
 
     /**
@@ -290,7 +300,7 @@ class BookController extends Controller
         $courses = Course::all();
         $book = Book::find($id);
 
-        if ($book->quantity == 0) {
+        if ($book->available && $book->cd_quantity == 0) {
           Session::flash('borrow_warning', $book->id);
           return redirect()->route('home');
         }
@@ -314,12 +324,24 @@ class BookController extends Controller
         $borrower->name = $request->name;
         $borrower->address = $request->address;
         $borrower->contact = $request->contact;
+        $borrower->borrowed = $request->cd;
         $borrower->deadline = $request->deadline;
 
         $borrower->save();
 
         // $book->availability = 0;
-        $book->available = $book->available - 1;
+        if($borrower->borrowed == 0){
+            $book->cd_quantity = $book->cd_quantity - 1;
+            $book->available = $book->available - 1;}
+            elseif($borrower->borrowed == 1){
+                $book->cd_quantity = $book->cd_quantity - 1;
+            }
+            elseif($borrower->borrowed == 2){
+                $book->available = $book->available - 1;
+            }
+            else{                
+            }
+        
 
         $book->save();
 
@@ -334,14 +356,36 @@ class BookController extends Controller
           ->with('borrowers', $borrowers);
     }
 
-    public function destroyBorrowBook($id) {
+    public function viewBorrowLogs(){
+      $borrowers = Borrower::all();
+      return view('books.borrowlogs')
+          ->with('borrowers', $borrowers);
+    }
+
+    // public function destroyBorrowBook($id) {
         
+    //     $borrower = Borrower::find($id);
+    //     $book_id = $borrower->book_id;
+    //     $book = Book::find($book_id);
+
+    //     $borrower->delete();
+    //     $book->available = $book->available + 1;
+    //     $book->save();
+
+    //     return redirect()->back();
+
+    // }
+
+    public function returnBorrowBook(Request $request, $id) {
+        $this->validate($request, [
+            'returned'                   =>               'required'
+        ]);
         $borrower = Borrower::find($id);
         $book_id = $borrower->book_id;
         $book = Book::find($book_id);
-
-        $borrower->delete();
-        $book->quantity = $book->quantity + 1;
+        $borrower->returned = $request->returned;  
+        $borrower->save();
+        $book->available = $book->available + 1;
         $book->save();
 
         return redirect()->back();

@@ -90,8 +90,8 @@
             </form>
           </div> --}}
           <div class="form-group">
-              <label for="quantity">Quantity</label>
-              <input type="text" id="quantity" class="form-control" name="quantity" required>
+              <label for="quantity">Book Quantity</label>
+              <input type="text" id="quantity" class="form-control" name="quantity">
           </div>
           {{-- <div class="form-group row">
               <label class="col-md-3">Available</label>

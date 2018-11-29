@@ -206,6 +206,7 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('view.borrowers') }}" aria-expanded="false"><i class="fas fa-users"></i><span class="hide-menu">Borrowers</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('tag.index') }}" aria-expanded="false"><i class="fa fa-tag"></i><span class="hide-menu">Tags</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('course.index') }}" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Programs</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ route('view.borrowlogs') }}" aria-expanded="false"><i class="fa fa-history"></i><span class="hide-menu">Logs</span></a></li>
                         
                     </ul>
                 </nav>

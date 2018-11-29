@@ -55,17 +55,20 @@
                                         @else
                                         <i style="color: #da542e;" class="fas fa-times"></i>
                                         @endif --}}
-            <label>Quantity :</label> {{ $book->quantity }}
-            <label>Available :</label> {{ $book->available }}
+            {{-- <label>Quantity :</label> {{ $book->quantity }}
+            <label>Available :</label> {{ $book->available }} --}}
         </dl>
-        <dl class="dl-horizontal">
+        <div class="col-lg-5">
           @if($book->with_cd == 1)
-                                        <label>CD: {{$book->cd_quantity}}</label> <i style="color: #28b779;" class="fas fa-check"></i>
+                                        <label>CD: {{$book->cd_quantity}}</label>
+                                        <label>Book Available: {{$book->available}}</label> 
                                         @elseif($book->cd_only == 1)
                                         <label>CD ONLY: {{$book->cd_quantity}}</label>
-                                        <i style="color: #da542e;" class="fas fa-times"></i>
+                                       {{--  <i style="color: #da542e;" class="fas fa-check"></i> --}}
+                                        @else
+                                        <label>Book Only {{$book->available}}</label>
                                         @endif
-        </dl>
+        </div>
         @if($book->available >= 1)
                                             <a href="{{ route('view.borrow.book', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-book"> Borrow</i></a>
                                           @endif

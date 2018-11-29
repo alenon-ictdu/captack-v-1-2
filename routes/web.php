@@ -59,7 +59,11 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 
 	Route::get('/book/borrow/edit/{id}', 'BookController@editBorrowBook')->name('edit.borrow.book');
 	Route::match(['PUT', 'PATCH'], '/book/borrow/update/{id}', 'BookController@updateBorrowBook')->name('update.borrow.book');
-	Route::delete('/book/borrow/{id}', 'BookController@destroyBorrowBook')->name('destroy.borrow.book');
+
+	// Route::delete('/book/borrow/{id}', 'BookController@destroyBorrowBook')->name('destroy.borrow.book');
+	//RETURN BOOK
+	Route::match(['PUT', 'PATCH'], '/book/borrow/{id}', 'BookController@returnBorrowBook')->name('return.borrow.book');
+
 	Route::get('borrowers', 'BookController@viewBorrowers')->name('view.borrowers');
 
 	Route::get('/book/print-selected-books', 'BookController@selectBooks')->name('select-books');
@@ -80,6 +84,9 @@ Route::group(['middleware' => 'prevent-back-history'],function(){
 	Route::match(['PUT', 'PATCH'], 'user/settings/{id}', 'UserController@updatePassword')->name('update.password');
 
 	Route::get('/dashboard', 'BookController@dashboard')->name('dashboard');
+
+	//Borrow Logs
+	Route::get('borrowlogs', 'BookController@viewBorrowLogs')->name('view.borrowlogs');
 
 	//Tags
 	Route::resource('tag', 'TagController', ['except' => ['create']]);

@@ -59,6 +59,33 @@
 	              <label for="contact">Contact No. or Email</label>
 	              <input type="text" id="contact" class="form-control input-sm" name="contact" value="{{ old('contact') }}" required data-parsley-maxlength="25" data-parsley-required-message="Contact is required">
 	          </div>
+            <div class="form-group row">
+              @if($book->with_cd == 1)
+              <label class="col-md-3">Book & Cd</label>
+              <div class="col-md-9">
+                  <div class="custom-control custom-checkbox mr-sm-2">
+                      <input type="radio" class="form-control" id="1" name="cd" value="0">
+                  </div>
+              </div>
+              @endif
+              @if($book->cd_quantity >= 1)
+              <label class="col-md-3">Cd Only</label>
+              <div class="col-md-9">
+                  <div class="custom-control custom-checkbox mr-sm-2">
+                      <input type="radio" class="form-control" id="2" name="cd" value="1">
+              </div>
+            </div>
+            @endif
+            @if($book->available >= 1)
+          <label class="col-md-3">Book Only</label>
+              <div class="col-md-9">
+                  <div class="custom-control custom-checkbox mr-sm-2">
+                      <input type="radio" class="form-control" id="3" name="cd" value="2">
+              </div>
+          </div>
+          @endif
+        </div>
+
 	          <div class="form-group">
 	              <label for="deadline">Due Date</label>
 	              <input type="date" id="deadline" class="form-control input-sm" name="deadline" value="{{ old('deadline') }}" required data-parsley-required-message="Deadline is required">

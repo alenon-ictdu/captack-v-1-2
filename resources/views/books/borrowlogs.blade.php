@@ -1,6 +1,6 @@
 @extends('layouts.app3')
 
-@section('title', 'Borrowers')
+@section('title', 'Borrow Logs')
 
 @section('styles')
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
@@ -13,7 +13,7 @@
 <div class="page-breadcrumb">
     <div class="row">
         <div class="col-12 d-flex no-block align-items-center">
-            <h4 class="page-title">Borrowers</h4>
+            <h4 class="page-title">Borrow Logs</h4>
             <div class="ml-auto text-right">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
@@ -40,21 +40,19 @@
 			<thead>
 				<tr>
 					<th style="width:11%; ">Name</th>
-					<th style="width:11%; ">Address</th>
 					<th style="width:11%; ">Contact</th>
 					<th style="width:30%; ">Book</th>
 					<th style="width:30%; ">Borrowed</th>
 					<th style="width:11%; ">Date Borrowed</th>
 					<th style="width:11%; ">Due Date</th>
-					<th style="width:11%; ">Actions</th>
+					<th style="width:11%; ">Returned</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach($borrowers as $row)
+					@if(!empty($row->returned))
 					<tr @if(session('isNew') == $row->id) style="font-weight: bold; color: #27a9e3;" @endif>
-						@if(empty($row->returned))
 						<td>{{$row->name}}</td>
-						<td>{{$row->address}}</td>
 						<td>{{$row->contact }}</td>
 						<td>{{$row->book->title}}</td>
 						@if($row->borrowed == 0)
@@ -66,13 +64,7 @@
 						@endif
 						<td>{{date('F d, Y',strtotime($row->created_at) )}}</td>
 						<td>{{date('F d, Y',strtotime($row->deadline) )}}</td>
-						<td>
-							<form method="POST" action="{{ route('return.borrow.book', $row->id) }}"> {{ csrf_field() }}
-								<input type="hidden" name="returned" value="{{ date('F d, Y') }}">
-								<button class="btn btn-xs btn-cyan"><i class="fas fa-reply"></i> Return Item</button>
-								{{ method_field('PUT') }}
-							</form>
-						 	<a href="{{ route('edit.borrow.book', $row->id) }}" class="btn btn-xs btn-success"><i class="fas fa-edit"></i> EXTEND</a></td>
+						<td>{{$row->returned}}</td>
 					</tr>
 					@endif
 				@endforeach

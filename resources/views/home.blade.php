@@ -101,7 +101,7 @@
                                       </td>
                                       <td>
                                           <a href="{{ route('book.show', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-eye"></i></a>
-                                          @if($book->available >= 1)
+                                          @if($book->available || $book->cd_quantity >= 1)
                                             <a href="{{ route('view.borrow.book', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-book"></i></a>
                                           @endif
                                           <a href="{{ route('book.edit', $book->id) }}" class="btn btn-outline-dark btn-xs"><i class="fa fa-edit"></i></a>
