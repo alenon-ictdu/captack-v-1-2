@@ -68,7 +68,7 @@
                               <th style="width:10%">Year Published</th>
                               <th>Course</th>
                               <th>Available</th>
-                              {{-- <th>Availability</th> --}}
+                              <th>Tags</th>
                               <th>CD</th>
                               <th>QR Code</th>
                               <th style="width:25%" >Actions</th>
@@ -82,14 +82,16 @@
                                       <td title="{{ $book->title }}">{{ $book->title }} @if($book->created_at >= $day7) <span class="badge badge-danger">New</span> @endif</td>
                                       <td title="{{ $book->author }}">{{ (strlen($book->author) >= 30) ? substr($book->author, 0, 30). '...' : $book->author }}</td>
                                       <td>{{ $book->year_published }}</td>    
-                                      <td>{{ $book->course['abbreviation'] }}</td>
-                                      {{-- <td>@if($book->availability == 1)
-                                          <i style="color: #28b779;" class="fas fa-check"></i>
-                                          @else
-                                          <i style="color: #da542e;" class="fas fa-times"></i>
-                                          @endif
-                                      </td> --}}
+                                      <td>{{ $book->course['abbreviation'] }}</td> 
                                       <td>{{ $book->available }}</td>
+                                      <td>@foreach($book->tags as $row)
+                                        @if($row->count() > 1)
+                                          {{ $row->name }},
+                                          @else
+                                          {{ $row->name }}
+                                          @endif
+                                        @endforeach
+                                      </td>
                                       <td>@if($book->with_cd || $book->cd_only == 1)
                                           {{ $book->cd_quantity }}
                                           @else

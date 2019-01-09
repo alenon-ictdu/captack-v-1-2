@@ -14,7 +14,7 @@ class AddQuantityColToBooks extends Migration
     public function up()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->integer('quantity')->unsigned()->nullable()->after('image');
+            $table->integer('quantity')->unsigned()->nullable()->after('course_id');
         });
     }
 

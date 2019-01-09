@@ -14,7 +14,7 @@ class AddWithCd extends Migration
     public function up()
     {
         Schema::table('books', function (Blueprint $table) {
-            $table->boolean('with_cd')->nullable()->after('availability');
+            $table->boolean('with_cd')->nullable()->after('available');
         });
     }
 

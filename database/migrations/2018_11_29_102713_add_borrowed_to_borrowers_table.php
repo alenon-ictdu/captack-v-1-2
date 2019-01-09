@@ -14,7 +14,7 @@ class AddBorrowedToBorrowersTable extends Migration
     public function up()
     {
         Schema::table('borrowers', function (Blueprint $table) {
-            $table->string('borrowed')->nullable()->after('contact');
+            $table->string('borrowed')->after('contact');
         });
     }
 

@@ -48,6 +48,7 @@ class BookController extends Controller
             ->with('books', $books)
             ->with('courses', $courses)
             ->with('borrowers', $borrowers)
+            ->with('tags', $tags)
             ->with('returnedcount', $returnedcount)
             ->with('borrowedBooks', $borrowedBooks)
             ->with('latestBooks', $latestBooks);
@@ -102,6 +103,8 @@ class BookController extends Controller
         $book->cd_only = $request->has('cdonly');
         $book->cd_quantity = $request->cdquantity;
         $book->save();
+
+        $book->tags()->sync($request->tags, false);
 
         Session::flash('success', 'Book successfully added.');
         return redirect()->route('book.show', $book->id);
@@ -300,10 +303,10 @@ class BookController extends Controller
         $courses = Course::all();
         $book = Book::find($id);
 
-        if ($book->available && $book->cd_quantity == 0) {
-          Session::flash('borrow_warning', $book->id);
-          return redirect()->route('home');
-        }
+        // if ($book->available || $book->cd_quantity == 0) {
+        //   Session::flash('borrow_warning', $book->id);
+        //   return redirect()->route('home');
+        // }
         return view('books.borrow')
             ->with('book', $book)
             ->with('courses', $courses);
