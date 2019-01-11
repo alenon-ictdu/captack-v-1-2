@@ -60,7 +60,7 @@
 	              <input type="text" id="contact" class="form-control input-sm" name="contact" value="{{ old('contact') }}" required data-parsley-maxlength="25" data-parsley-required-message="Contact is required">
 	          </div>
             <div class="form-group row">
-              @if($book->cd_quantity && $book->available >= 1)
+              @if($book->cd_available && $book->available >= 1)
               <label class="col-md-3">Book & Cd</label>
               <div class="col-md-9">
                   <div class="custom-control custom-checkbox mr-sm-2">
@@ -68,7 +68,7 @@
                   </div>
               </div>
               @endif
-              @if($book->cd_quantity >= 1)
+              @if($book->cd_available >= 1)
               <label class="col-md-3">Cd Only</label>
               <div class="col-md-9">
                   <div class="custom-control custom-checkbox mr-sm-2">

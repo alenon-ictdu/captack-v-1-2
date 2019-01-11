@@ -101,9 +101,10 @@ class BookController extends Controller
         $book->quantity = $request->quantity;
         $book->with_cd = $request->has('withcd');
         $book->cd_only = $request->has('cdonly');
+        $book->cd_available = $request->cdquantity;
         $book->cd_quantity = $request->cdquantity;
         $book->save();
-
+        
         $book->tags()->sync($request->tags, false);
 
         Session::flash('success', 'Book successfully added.');
@@ -195,7 +196,7 @@ class BookController extends Controller
             'author'                  =>               'required',
             'year_published'          =>               'required|integer|between:1900,'.$yearNow,
             'bookpic'                 =>               'sometimes|image',
-            'course'                  =>               'required' 
+            'course'                  =>               'required'                                   
         ]);
 
         $book = New Book;
@@ -204,25 +205,16 @@ class BookController extends Controller
         $book->author = $request->author;
         $book->year_published = $request->year_published;
         $book->course_id = $request->course;
+        $book->available = $request->quantity;
         // $book->availability = $request->has('available');
         $book->quantity = $request->quantity;
         $book->with_cd = $request->has('withcd');
         $book->cd_only = $request->has('cdonly');
+        $book->cd_available = $request->cdquantity;
         $book->cd_quantity = $request->cdquantity;
-
-
-        if($request->hasFile('bookpic')){
-                $image = $request->file('bookpic');
-                $filename = time() . '.' . $image->getClientOriginalExtension();
-                $location = public_path('images/' . $filename);
-                Image::make($image)->save($location);
-                $oldImage = $book->image; //old imagename
-
-                $book->image = $filename; 
-             
-            }
-
         $book->save();
+
+        $book->tags()->sync($request->tags, false);
 
         Session::flash('success', 'Book successfully added.');
         return redirect()->route('book.create');
@@ -334,16 +326,16 @@ class BookController extends Controller
 
         // $book->availability = 0;
         if($borrower->borrowed == 0){
-            $book->cd_quantity = $book->cd_quantity - 1;
+            $book->cd_available = $book->cd_available - 1;
             $book->available = $book->available - 1;}
-            elseif($borrower->borrowed == 1){
-                $book->cd_quantity = $book->cd_quantity - 1;
-            }
-            elseif($borrower->borrowed == 2){
-                $book->available = $book->available - 1;
-            }
-            else{                
-            }
+        elseif($borrower->borrowed == 1){
+            $book->cd_available = $book->cd_available - 1;
+        }
+        elseif($borrower->borrowed == 2){
+            $book->available = $book->available - 1;
+        }
+        else{                
+        }
         
 
         $book->save();
@@ -386,9 +378,21 @@ class BookController extends Controller
         $borrower = Borrower::find($id);
         $book_id = $borrower->book_id;
         $book = Book::find($book_id);
+
+        $book = Book::find($book_id);
         $borrower->returned = $request->returned;  
         $borrower->save();
-        $book->available = $book->available + 1;
+        if($borrower->borrowed == 0)
+        {
+            $book->available = $book->available + 1;
+            $book->cd_available = $book->cd_available + 1;
+        }
+        if($borrower->borrowed == 1){
+            $book->cd_available = $book->cd_available + 1;
+        }
+        elseif($borrower->borrowed == 2){
+            $book->available = $book->available + 1;
+        }
         $book->save();
 
         return redirect()->back();
@@ -429,14 +433,14 @@ class BookController extends Controller
         return redirect()->route('view.borrowers');
     }
 
-    /*public function bookBorrowed(){
+    public function bookBorrowed(){
         $books = Book::where('availability', '=', 0)
             ->orderBy('id', 'desc')->paginate(10);
 
         return view('books.borrowed')
             ->with('books', $books);
 
-    }*/
+    }
 
 
 
@@ -510,7 +514,7 @@ class BookController extends Controller
             $dataLength = count($_POST['selectedData']);
             for ($i=0; $i < $dataLength; $i++) { 
                 // echo('id = '. $_POST['selectedData'][$i]['id'] . 'quantity = '. $_POST['selectedData'][$i]['quantity']);
-                /*$html .= "<div style='display: inline-block;font-family: 'Roboto', sans-serif;;padding: 5px;'><img src=".{{ asset('images/spcf-property.png') }}." width='300' style='border-bottom: 1px solid black; padding-bottom: 5px;'></div>";*/
+                /*$html .= "<div style='display: inline-block;font-family: 'Roboto', sans-serif;;padding: 5px;'><img src=".{{ asset('images/spcf-property.png') }}." width='300' style='border-bottom: 1px solid black; padding-bottom: 5px;'></div>";
 
                     /*<div style="display: inline-block;font-family: 'Roboto', sans-serif;;padding: 5px;">
                         <img src="{{ asset('images/spcf-property.png') }}" width="300" style="border-bottom: 1px solid black; padding-bottom: 5px;">

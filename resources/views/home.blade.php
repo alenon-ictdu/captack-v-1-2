@@ -67,7 +67,7 @@
                               <th style="width:10%">Author(s)</th>
                               <th style="width:10%">Year Published</th>
                               <th>Course</th>
-                              <th>Available</th>
+                              <th>Available Books</th>
                               <th>Tags</th>
                               <th>CD</th>
                               <th>QR Code</th>
@@ -82,8 +82,8 @@
                                       <td title="{{ $book->title }}">{{ $book->title }} @if($book->created_at >= $day7) <span class="badge badge-danger">New</span> @endif</td>
                                       <td title="{{ $book->author }}">{{ (strlen($book->author) >= 30) ? substr($book->author, 0, 30). '...' : $book->author }}</td>
                                       <td>{{ $book->year_published }}</td>    
-                                      <td>{{ $book->course['abbreviation'] }}</td> 
-                                      <td>{{ $book->available }}</td>
+                                      <td>{{ $book->course['name'] }}</td> 
+                                      <td>{{ $book->available }}/{{ $book->quantity }}</td>
                                       <td>@foreach($book->tags as $row)
                                         @if($row->count() > 1)
                                           {{ $row->name }},
@@ -93,7 +93,7 @@
                                         @endforeach
                                       </td>
                                       <td>@if($book->with_cd || $book->cd_only == 1)
-                                          {{ $book->cd_quantity }}
+                                          {{ $book->cd_available }}/{{ $book->cd_quantity }}
                                           @else
                                           <i style="color: #da542e;" class="fas fa-times"></i>
                                           @endif
