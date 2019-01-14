@@ -93,6 +93,7 @@
                                         <span class="m-b-15 d-block" style="text-transform: capitalize;">{{$row->title}} </span>
                                         <div class="comment-footer">
                                             <span class="text-muted float-right"> {{$row->year_published}}</span>
+
                                             <a href="{{ route('book.show', $row->id) }}" class="btn btn-success btn-sm">View</a>
                                         </div>
                                     </div>
@@ -117,11 +118,18 @@
                                         <div class="d-flex flex-row comment-row m-t-0">
                                             <div class="p-2"></div>
                                             <div class="comment-text w-100">
-                                                <h6 class="font-medium" style="text-transform: capitalize;">{{$row->book->title}}</h6>
+                                                @if($row->borrowed == 0)
+                                                <h6 class="font-medium" style="text-transform: capitalize;">{{$row->book->title}} (Book & CD)</h6>
+                                                @elseif($row->borrowed == 1)
+                                                <h6 class="font-medium" style="text-transform: capitalize;">{{$row->book->title}} (CD ONLY)</h6>
+                                                @elseif($row->borrowed == 2)
+                                                <h6 class="font-medium" style="text-transform: capitalize;">{{$row->book->title}} (BOOK ONLY)</h6>
+                                                @endif
                                                 <span class="m-b-15 d-block" style="text-transform: capitalize;">{{$row->name}} </span>
                                                 <span class="m-b-15 d-block" style="text-transform: capitalize;">{{$row->contact}} </span>
-                                                <div class="comment-footer">
 
+                                                <div class="comment-footer">
+                                                    <span class="text-muted float-right"> {{$row->borrowed}}</span>
                                                     <span class="text-muted float-right">Due: {{$row->deadline}}</span>
                                                     <a href="{{ route('book.show', $row->id) }}" class="btn btn-success btn-sm">View</a>
                                                 </div>
